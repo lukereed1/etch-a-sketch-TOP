@@ -1,16 +1,24 @@
 const grid = document.querySelector("#grid");
 const gridSize = document.querySelector("#size");
-const colorButton = document.querySelector("#color");
+const blackButton = document.querySelector("#black");
 const rainbowButton = document.querySelector("#rainbow");
 const eraserButton = document.querySelector("#eraser");
 const resetButton = document.querySelector("#reset");
 const slider = document.querySelector("#slider");
+let lastMode = "pick-color";
+let lastColor = "#000000";
 rainbowButton.addEventListener("click", () => startPainting("rainbow"));
-colorButton.addEventListener("click", () => startPainting("default"));
+blackButton.addEventListener("click", () => startPainting("pick-color", "black"));
 eraserButton.addEventListener("click", () => startPainting("eraser"));
 resetButton.addEventListener("click", () => resetGrid());
 slider.addEventListener("input", changeSize);
-let lastUsed = "default";
+
+const colorPicker = document.querySelector("#color-picker");
+colorPicker.addEventListener("input", (e) => {
+	console.log(e);
+	const rgbCode = e.target.value;
+	startPainting("pick-color", rgbCode);
+});
 
 function createGrid(size) {
 	grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -21,16 +29,17 @@ function createGrid(size) {
 	}
 }
 
-function startPainting(mode) {
+function startPainting(mode, rgb) {
 	const gridSquares = document.querySelectorAll("#grid > div");
 	gridSquares.forEach((div) => {
 		div.addEventListener("mouseenter", (e) => {
-			if (mode === "default") {
-				e.target.style.background = "black";
+			if (mode === "pick-color") {
+				e.target.style.background = rgb;
 			} else if (mode === "rainbow") {
 				let rainbowColor = Math.floor(Math.random() * 16777215).toString(16);
 				e.target.style.background = `#${rainbowColor}`;
 				lastUsed = "rainbow";
+				lastColor = rainbowColor;
 			} else {
 				e.target.style.background = "white";
 			}
@@ -50,10 +59,10 @@ function changeSize() {
 	let newGridSize = slider.value;
 	gridSize.innerText = `${newGridSize} x ${newGridSize}`;
 	createGrid(newGridSize);
-	startPainting(lastUsed);
+	startPainting(lastMode, lastColor);
 }
 
 window.onload = () => {
 	createGrid(16);
-	startPainting("default");
+	startPainting("pick-color", "#000000");
 };
