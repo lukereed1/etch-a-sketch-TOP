@@ -1,6 +1,7 @@
 body {
 	margin: 0;
 	background: hsl(38, 100%, 89%);
+	font-family: "Montserrat", sans-serif;
 }
 
 h1 {
@@ -30,7 +31,22 @@ main {
 
 #settings-top {
 	display: flex;
-	gap: 20px;
+	gap: 15px;
+}
+
+#settings-top > button {
+	font-size: 1.5rem;
+	padding: 0.25em 0.75em;
+	background: #f5f5f5;
+	border: 1px solid black;
+	border-radius: 20px;
+	cursor: pointer;
+	font-family: "Montserrat", sans-serif;
+}
+
+button:hover,
+input:hover {
+	transform: scale(1.05);
 }
 
 #settings-bot {
@@ -42,7 +58,7 @@ main {
 }
 
 #color-picker {
-	margin: 10px 40px 10px 10.5px;
+	margin: 10px 40px 10px 9px;
 	border: none;
 	height: 75px;
 	width: 75px;
@@ -58,27 +74,11 @@ main {
 }
 
 #grid-edit {
-	margin-left: 35px;
-}
-
-#settings-top > button {
-	font-size: 1.5rem;
-	padding: 0.25em 0.75em;
-	background: #f5f5f5;
-	border: 1px solid black;
-	border-radius: 20px;
-	cursor: pointer;
-}
-
-button:hover {
-	transform: scale(1.05);
-}
-
-#grid-edit {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	margin-top: 12px;
+	margin-left: 27.5px;
 }
 
 #grid-edit > p {
