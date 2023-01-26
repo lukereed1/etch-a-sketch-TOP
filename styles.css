@@ -111,3 +111,27 @@ input:hover {
 #size {
 	font-size: 22px;
 }
+
+@media (max-width: 560px) {
+	#grid {
+		height: 400px;
+		width: 400px;
+	}
+
+	#settings-top > button {
+		font-size: 1.25rem;
+	}
+
+	#settings-bot {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#color-picker {
+		margin: 20px 0 10px 0;
+	}
+
+	#grid-edit {
+		margin: auto;
+	}
+}
