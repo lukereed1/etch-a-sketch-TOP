@@ -8,12 +8,6 @@ const resetButton = document.querySelector("#reset");
 const slider = document.querySelector("#slider");
 const colorPicker = document.querySelector("#color-picker");
 
-// Upon loading this creates the default 16x16 grid and start painting in black mode
-window.onload = () => {
-	createGrid(16);
-	startPainting("pick-color", "#000000");
-};
-
 // Events for each button
 rainbowButton.addEventListener("click", () => startPainting("rainbow"));
 blackButton.addEventListener("click", () => startPainting("pick-color", "black"));
@@ -23,11 +17,17 @@ resetButton.addEventListener("click", () => resetGrid());
 // Takes input from slider for the grid size
 slider.addEventListener("input", () => changeSize(slider.value));
 
-// Sends a hex color code to painting function if user selects from the color wheel
+// Sends a hex color code to startPainting function if user selects from the color wheel
 colorPicker.addEventListener("input", (e) => {
 	const userHexCode = e.target.value;
 	startPainting("pick-color", userHexCode);
 });
+
+// Upon loading this creates the default 16x16 grid and start painting in black mode
+window.onload = () => {
+	createGrid(16);
+	startPainting("pick-color", "#000000");
+};
 
 // Uses input from slider to change the size of the grid
 function createGrid(size) {
@@ -56,13 +56,6 @@ function startPainting(mode, color) {
 		});
 	});
 }
-// Resets the grid turning all squares to white
-function resetGrid() {
-	const gridSquares = document.querySelectorAll("#grid > div");
-	gridSquares.forEach((div) => {
-		div.style.background = "white";
-	});
-}
 
 // Changes the size of grid to whatever user selects on slider input
 function changeSize(newSize) {
@@ -70,4 +63,12 @@ function changeSize(newSize) {
 	resetGrid();
 	gridSize.innerText = `${newSize} x ${newSize}`; // Changes text below slider to match the grid size
 	startPainting("pick-color", "#000000"); // Reverts back to default paint mode
+}
+
+// Resets the grid turning all squares to white
+function resetGrid() {
+	const gridSquares = document.querySelectorAll("#grid > div");
+	gridSquares.forEach((div) => {
+		div.style.background = "white";
+	});
 }
